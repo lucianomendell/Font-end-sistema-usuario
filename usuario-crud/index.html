@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sistema de Cadastro de Usuário</title>
+  </head>
+  <!-- Ajax é Assícrono, ele não fica esperando a resposta vai executando as próximas instruções-->
+  <body>
+    <h1>Listagem de Usuários</h1>
+    <div id="lista"></div>
+    <script>
+      ajax = new XMLHttpRequest();
+      ajax.open("GET", "https://senac-usuario-home.herokuapp.com/api/usuario/");
+      ajax.send();
+      ajax.onload = function () {
+        lista = this.responseText;
+        lista = JSON.parse(lista);
+        document.getElementById("lista").innerHTML = "Lista de pessoas <br>";
+
+        for (const i of lista) {
+          document.getElementById("lista").append(i.nome + `<br>`);
+        }
+      };
+    </script>
+  </body>
+</html>
