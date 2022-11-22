@@ -2,24 +2,62 @@
 <html lang="en">
   <head>
     <title>Sistema de Cadastro de Usuário</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   </head>
   <!-- Ajax é Assícrono, ele não fica esperando a resposta vai executando as próximas instruções-->
   <body>
-    <h1>Listagem de Usuários</h1>
-    <div id="lista"></div>
-    <script>
-      ajax = new XMLHttpRequest();
-      ajax.open("GET", "https://senac-usuario-home.herokuapp.com/api/usuario/");
-      ajax.send();
-      ajax.onload = function () {
-        lista = this.responseText;
-        lista = JSON.parse(lista);
-        document.getElementById("lista").innerHTML = "Lista de pessoas <br>";
+    <style>
+      tbody {
+        cursor: pointer;
+      }
+    </style>
+    <div class="container">
+      <input type="hidden" id="id" />
 
-        for (const i of lista) {
-          document.getElementById("lista").append(i.nome + `<br>`);
-        }
-      };
-    </script>
+      <label>Nome: </label>
+      <input type="text" name="nome" id="nome" class="form-control" />
+
+      <label>E-mail: </label>
+      <input type="text" name="email" id="email" class="form-control" /><br />
+
+      <input
+        type="button"
+        value="Salvar"
+        onclick="incluir()"
+        class="btn btn-primary"
+      />
+      <input
+        type="button"
+        value="Novo"
+        onclick="limpar()"
+        class="btn btn-success"
+      />
+      <input
+        type="button"
+        value="Excluir"
+        onclick="apagar()"
+        class="btn btn-danger"
+      />
+    </br>
+
+  </br>
+
+      <h2>Listagem de Usuários</h2>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody id="lista"></tbody>
+      </table>
+    </div>
+    <script src="js/script.js"></script>
+   
   </body>
 </html>
